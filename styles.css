@@ -1,0 +1,224 @@
+
+:root[data-theme="light"] {
+    --bg-color: #f4f7f6;
+    --text-color: #333;
+    --card-bg: #fff;
+    --accent-color: #0078d7;
+    --accent-hover: #005a9e;
+    --nav-bg: rgba(255, 255, 255, 0.95);
+    --shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+:root[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #f4f4f4;
+    --card-bg: #2d2d2d;
+    --accent-color: #4da8da;
+    --accent-hover: #2980b9;
+    --nav-bg: rgba(26, 26, 26, 0.95);
+    --shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background-color 0.3s, color 0.3s; }
+body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+
+.navbar { position: sticky; top: 0; background: var(--nav-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); z-index: 1000; backdrop-filter: blur(5px); }
+.nav-links { display: flex; gap: 0.5rem; }
+.nav-tab { background: none; border: none; color: var(--text-color); padding: 0.5rem 1rem; cursor: pointer; font-weight: 500; border-radius: 8px; font-size: 1rem; }
+.nav-tab:hover { background: rgba(0, 120, 215, 0.1); color: var(--accent-color); }
+.nav-tab.active { background: var(--accent-color); color: #fff; }
+
+.theme-btn { background: none; border: 2px solid var(--accent-color); color: var(--text-color); padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-weight: bold; }
+
+.content-wrapper { flex: 1; padding: 2rem; max-width: 1200px; margin: 0 auto; width: 100%; position: relative; }
+
+.tab-content { display: none; animation: slideIn 0.4s ease-out; }
+.tab-content.active { display: block; }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.hero-content { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.avatar-placeholder { 
+    width: 180px; /* Можно немного увеличить размер */
+    height: 180px; 
+    border-radius: 50%; 
+    margin: 0 auto 1.5rem; 
+    border: 4px solid var(--text-color); 
+    object-fit: cover; /* КРИТИЧНО: сохраняет пропорции лица */
+    display: block;    /* Правильное позиционирование картинки */
+}
+
+h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 1.5rem; }
+.section-desc { text-align: center; margin-bottom: 2rem; opacity: 0.8; }
+
+.btn { display: inline-block; padding: 0.8rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: bold; margin: 0.5rem; cursor: pointer; border: none; }
+.primary-btn { background: var(--accent-color); color: #fff; }
+.secondary-btn { border: 2px solid var(--accent-color); color: var(--text-color); background: none; }
+
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.card, .practice-card { background: var(--card-bg); border-radius: 10px; padding: 1.5rem; box-shadow: var(--shadow); }
+
+.tags { margin: 1rem 0; }
+.tags span { display: inline-block; background: var(--accent-color); color: #fff; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; margin: 0.2rem; }
+
+.sdlc-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.sdlc-step { background: var(--card-bg); padding: 1rem 1.5rem; border-radius: 30px; border: 2px solid var(--accent-color); cursor: pointer; position: relative; font-weight: bold; }
+.sdlc-step::after { content: attr(data-tooltip); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: var(--text-color); color: var(--bg-color); padding: 0.8rem; border-radius: 8px; white-space: nowrap; opacity: 0; visibility: hidden; transition: 0.3s; font-size: 0.9rem; z-index: 10; }
+.sdlc-step:hover::after { opacity: 1; visibility: visible; }
+
+.about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.social-links a { display: inline-block; margin-right: 1rem; margin-top: 1rem; color: var(--accent-color); text-decoration: none; font-weight: bold; }
+
+footer { text-align: center; padding: 2rem; background: var(--card-bg); margin-top: auto; }
+
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; gap: 1rem; }
+    .nav-links { flex-wrap: wrap; justify-content: center; }
+    .about-content { grid-template-columns: 1fr; }
+}
+/* Сетка сертификатов */
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+
+/* Карточка сертификата */
+.cert-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.cert-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* Контейнер для фото, чтобы они были одинакового размера */
+.cert-img-container {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #eee;
+}
+
+.cert-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Обрезает лишнее, сохраняя пропорции */
+    transition: transform 0.5s ease;
+}
+
+.cert-card:hover img {
+    transform: scale(1.1); /* Легкий зум при наведении */
+}
+
+/* Описание под фото */
+.cert-info {
+    padding: 20px;
+}
+
+.cert-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--accent-color);
+}
+
+.cert-info p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0.8;
+}
+/* Добавьте это в конец файла styles.css */
+.cert-link {
+    text-decoration: none; /* Убирает лишние подчеркивания */
+    display: block;
+    cursor: zoom-in; /* Меняет курсор на лупу с плюсиком */
+}
+
+/* Можно добавить легкое осветление при наведении */
+.cert-card:hover .cert-img-container {
+    filter: brightness(1.1);
+    transition: 0.3s;
+}
+/* Стили для модального окна */
+.modal {
+    display: none; /* По умолчанию скрыто */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9); /* Темный фон */
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: translateY(-50%) scale(0.7); opacity: 0; }
+    to { transform: translateY(-50%) scale(1); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* Выравнивание заголовков разделов по центру */
+.tab-content h2 {
+    text-align: center;
+    margin-bottom: 2rem; /* Добавляем небольшой отступ снизу для красоты */
+    width: 100%;        /* Гарантируем, что заголовок занимает всю ширину */
+}
+/* Контейнер теперь занимает всё пространство экрана */
+.croco-wrapper {
+    position: absolute; /* Позволяет перемещать объект по всей странице */
+    top: 70%;           /* Смещаем центр на 50% высоты */
+    left: 50%;          /* Смещаем центр на 50% ширины */
+    transform: translate(-50%, -50%); /* Центрируем сам объект относительно его середины */
+    z-index: 0;         /* Чтобы он был на заднем плане (или 100, если нужно поверх текста) */
+    pointer-events: none; /* Чтобы крокодил не мешал нажимать на кнопки и ссылки */
+}
+
+/* Крокодил с плавной анимацией */
+.animated-croco {
+    width: 300px; 
+    height: auto;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+    animation: croco-float 3s infinite ease-in-out;
+}
+
+/* Оставляем анимацию вверх-вниз */
+@keyframes croco-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-30px); /* Теперь он будет плавно летать вверх-вниз в центре */
+    }
+}
